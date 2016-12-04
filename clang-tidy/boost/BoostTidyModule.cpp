@@ -10,6 +10,7 @@
 #include "../ClangTidy.h"
 #include "../ClangTidyModule.h"
 #include "../ClangTidyModuleRegistry.h"
+#include "ReplaceScopedPtrCheck.h"
 #include "UseToStringCheck.h"
 using namespace clang::ast_matchers;
 
@@ -20,6 +21,8 @@ namespace boost {
 class BoostModule : public ClangTidyModule {
 public:
   void addCheckFactories(ClangTidyCheckFactories &CheckFactories) override {
+    CheckFactories.registerCheck<ReplaceScopedPtrCheck>(
+        "boost-replace-scoped-ptr");
     CheckFactories.registerCheck<UseToStringCheck>("boost-use-to-string");
   }
 };
